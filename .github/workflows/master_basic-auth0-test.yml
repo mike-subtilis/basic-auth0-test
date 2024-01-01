@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'basic-auth0-test'
           slot-name: 'Production'
-          package: .
+          package: ./build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3C9112FAF678484097926FE1AC19F73B }}
