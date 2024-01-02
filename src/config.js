@@ -1,6 +1,7 @@
 import configJson from "./auth_config.json";
 
 export function getConfig() {
+  console.log('process.env = ' + JSON.stringify(process.env));
   // Configure the audience here. By default, it will take whatever is in the config
   // (specified by the `audience` key) unless it's the default value of "YOUR_API_IDENTIFIER" (which
   // is what you get sometimes by using the Auth0 sample download tool from the quickstart page, if you
