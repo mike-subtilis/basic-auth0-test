@@ -7,14 +7,14 @@ export function getConfig() {
   // don't have an API).
   // If this resolves to `null`, the API page changes to show some helpful info about what to do
   // with the audience.
-  const audience =
-    configJson.audience && configJson.audience !== "YOUR_API_IDENTIFIER"
+  const audience = process.env.AUTH0_AUDIENCE ||
+    (configJson.audience && configJson.audience !== "YOUR_API_IDENTIFIER"
       ? configJson.audience
-      : null;
+      : null);
 
   return {
-    domain: configJson.domain,
-    clientId: configJson.clientId,
+    domain: process.env.AUTH0_DOMAIN || configJson.domain,
+    clientId: process.env.AUTH0_CLIENTID || configJson.clientId,
     ...(audience ? { audience } : null),
   };
 }

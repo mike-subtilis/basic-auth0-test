@@ -11,10 +11,16 @@ const port = process.env.API_PORT || 3001;
 const appPort = process.env.SERVER_PORT || 3000;
 const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
 
+const envAuthConfig = {
+  domain: process.env.AUTH0_DOMAIN || authConfig.domain,
+  clientId: process.env.AUTH0_CLIENTID || authConfig.clientId,
+  audience: process.env.AUTH0_AUDIENCE || authConfig.audience,
+};
+
 if (
-  !authConfig.domain ||
-  !authConfig.audience ||
-  authConfig.audience === "YOUR_API_IDENTIFIER"
+  !envAuthConfig.domain ||
+  !envAuthConfig.audience ||
+  envAuthConfig.audience === "YOUR_API_IDENTIFIER"
 ) {
   console.log(
     "Exiting: Please make sure that auth_config.json is in place and populated with valid domain and audience values"
@@ -28,8 +34,8 @@ app.use(helmet());
 app.use(cors({ origin: appOrigin }));
 
 const checkJwt = auth({
-  audience: authConfig.audience,
-  issuerBaseURL: `https://${authConfig.domain}/`,
+  audience: envAuthConfig.audience,
+  issuerBaseURL: `https://${envAuthConfig.domain}/`,
   algorithms: ["RS256"],
 });
 
