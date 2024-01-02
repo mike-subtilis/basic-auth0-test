@@ -9,7 +9,7 @@ const app = express();
 
 const port = process.env.API_PORT || 3001;
 const appPort = process.env.SERVER_PORT || 3000;
-const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
+const appOrigin = process.env.APP_ORIGIN || authConfig.appOrigin || `http://localhost:${appPort}`;
 
 const envAuthConfig = {
   domain: process.env.AUTH0_DOMAIN || authConfig.domain,
