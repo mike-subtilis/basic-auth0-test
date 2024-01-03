@@ -12,9 +12,9 @@ const appPort = process.env.SERVER_PORT || 3000;
 const appOrigin = process.env.APP_ORIGIN || authConfig.appOrigin || `http://localhost:${appPort}`;
 
 const envAuthConfig = {
-  domain: process.env.AUTH0_DOMAIN || authConfig.domain,
-  clientId: process.env.AUTH0_CLIENTID || authConfig.clientId,
-  audience: process.env.AUTH0_AUDIENCE || authConfig.audience,
+  domain: process.env.REACT_APP_AUTH0_DOMAIN || authConfig.domain,
+  clientId: process.env.REACT_APP_AUTH0_CLIENTID || authConfig.clientId,
+  audience: process.env.REACT_APP_AUTH0_AUDIENCE || authConfig.audience,
 };
 
 if (
