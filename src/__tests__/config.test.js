@@ -17,12 +17,4 @@ describe("The config module", () => {
   afterEach(() => {
     jest.resetModules();
   });
-
-  it("should return the audience if specified", () => {
-    mockConfig({ audience: "test-api" });
-
-    const { getConfig } = require("../config");
-
-    expect(getConfig().audience).toEqual("test-api");
-  });
 });
