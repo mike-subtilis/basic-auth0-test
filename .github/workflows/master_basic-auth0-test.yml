@@ -60,3 +60,7 @@ jobs:
           slot-name: 'Production'
           package: ./build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3C9112FAF678484097926FE1AC19F73B }}
+        env: # Add environment variables here
+          AUTH0_DOMAIN: dev-z-y80f5u.us.auth0.com
+          AUTH0_CLIENTID: V6ewwA6HANsKzzFaozNcQprgBfzi2aw1
+          AUTH0_AUDIENCE: https://api.react-auth-azure-test.com
