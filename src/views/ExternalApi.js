@@ -81,11 +81,7 @@ export const ExternalApiComponent = () => {
 
   const callHelloApi = async () => {
     try {
-      const token = await getAccessTokenSilently();
-
-      const response = await fetch(`${apiOrigin}/hello`, {
-      });
-
+      const response = await fetch(`${apiOrigin}/hello`);
       const responseData = await response.json();
 
       setState({
