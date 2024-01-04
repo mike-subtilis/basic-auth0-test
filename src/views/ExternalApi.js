@@ -79,6 +79,28 @@ export const ExternalApiComponent = () => {
     }
   };
 
+  const callHelloApi = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/hello`, {
+      });
+
+      const responseData = await response.json();
+
+      setState({
+        ...state,
+        showResult: true,
+        apiMessage: responseData,
+      });
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  };
+
   const handle = (e, fn) => {
     e.preventDefault();
     fn();
@@ -178,6 +200,15 @@ export const ExternalApiComponent = () => {
           disabled={!audience}
         >
           Ping API
+        </Button>
+
+        <Button
+          color="success"
+          className="mt-5"
+          onClick={callHelloApi}
+          disabled={!audience}
+        >
+          Ping Public API
         </Button>
       </div>
 
