@@ -56,6 +56,12 @@ export const ExternalApiComponent = () => {
 
   const callApi = async () => {
     try {
+      setState({
+        ...state,
+        showResult: false,
+        apiMessage: null,
+      });
+
       const token = await getAccessTokenSilently();
 
       const response = await fetch(`${apiOrigin}/api/external`, {
@@ -81,7 +87,37 @@ export const ExternalApiComponent = () => {
 
   const callHelloApi = async () => {
     try {
+      setState({
+        ...state,
+        showResult: false,
+        apiMessage: null,
+      });
+
       const response = await fetch(`${apiOrigin}/hello`);
+      const responseData = await response.json();
+
+      setState({
+        ...state,
+        showResult: true,
+        apiMessage: responseData,
+      });
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  };
+
+  const callPeopleApi = async () => {
+    try {
+      setState({
+        ...state,
+        showResult: false,
+        apiMessage: null,
+      });
+
+      const response = await fetch(`${apiOrigin}/api/people`);
       const responseData = await response.json();
 
       setState({
@@ -205,6 +241,15 @@ export const ExternalApiComponent = () => {
           disabled={!audience}
         >
           Ping Public API
+        </Button>
+
+        <Button
+          color="warning"
+          className="mt-5"
+          onClick={callPeopleApi}
+          disabled={!audience}
+        >
+          Ping People API
         </Button>
       </div>
 
