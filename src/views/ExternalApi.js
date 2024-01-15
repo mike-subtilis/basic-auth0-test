@@ -139,6 +139,36 @@ export const ExternalApiComponent = () => {
     }
   };
 
+  const callPeople1Api = async () => {
+    try {
+      setState({
+        ...state,
+        showResult: false,
+        apiMessage: null,
+      });
+
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/api/people/Wakefield.7`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const responseData = await response.json();
+
+      setState({
+        ...state,
+        showResult: true,
+        apiMessage: responseData,
+      });
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  };
+
   const handle = (e, fn) => {
     e.preventDefault();
     fn();
@@ -241,21 +271,21 @@ export const ExternalApiComponent = () => {
         </Button>
 
         <Button
-          color="success"
-          className="mt-5"
-          onClick={callHelloApi}
-          disabled={!audience}
-        >
-          Ping Public API
-        </Button>
-
-        <Button
           color="warning"
           className="mt-5"
           onClick={callPeopleApi}
           disabled={!audience}
         >
           Ping People API
+        </Button>
+
+        <Button
+          color="warning"
+          className="mt-5"
+          onClick={callPeople1Api}
+          disabled={!audience}
+        >
+          Ping People 1 API
         </Button>
       </div>
 
